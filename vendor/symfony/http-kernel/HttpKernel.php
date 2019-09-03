@@ -32,6 +32,7 @@ use Symfony\Component\HttpKernel\Exception\ControllerDoesNotReturnResponseExcept
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use YuZhi\Http\Middleware\Middleware;
 
 /**
  * HttpKernel notifies events to convert a Request object to a Response one.
@@ -148,7 +149,10 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
         $arguments = $event->getArguments();
 
         // call controller
-        $response = $controller(...$arguments);
+        // 载入中间件
+        $middlewares = require __DIR__ . '/../../../config/middleware.php';
+        Middleware::init($middlewares, $controller, $arguments);
+        $response = Middleware::dispatch(\YuZhi\Http\Request::createFromGlobals());
 
         // view
         if (!$response instanceof Response) {

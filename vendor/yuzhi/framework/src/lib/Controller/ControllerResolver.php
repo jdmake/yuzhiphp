@@ -1,32 +1,27 @@
 <?php
+// +----------------------------------------------------------------------
+// | Author: jdmake <503425061@qq.com>
+// +----------------------------------------------------------------------
+// | Date: 2019/9/3
+// +----------------------------------------------------------------------
 
-/*
- * This file is part of the Symfony package.
- *
- * (c) Fabien Potencier <fabien@symfony.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
-namespace Symfony\Component\HttpKernel\Controller;
+namespace YuZhi\Controller;
+
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
+use YuZhi\Http\Middleware\Middleware;
 
-/**
- * This implementation uses the '_controller' request attribute to determine
- * the controller to execute.
- *
- * @author Fabien Potencier <fabien@symfony.com>
- * @author Tobias Schultze <http://tobion.de>
- */
 class ControllerResolver implements ControllerResolverInterface
 {
+    private $container;
     private $logger;
 
-    public function __construct(LoggerInterface $logger = null)
+    public function __construct($container, LoggerInterface $logger = null)
     {
+        $this->container = $container;
         $this->logger = $logger;
     }
 
@@ -149,7 +144,7 @@ class ControllerResolver implements ControllerResolverInterface
      */
     protected function instantiateController($class)
     {
-        return new $class();
+        return new $class($this->container);
     }
 
     private function getControllerError($callable)
