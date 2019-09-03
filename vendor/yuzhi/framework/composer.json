@@ -1,0 +1,45 @@
+{
+    "name": "yuzhi/framework",
+    "type": "library",
+    "description": "yuzhi framework",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jdmake",
+            "email": "jdmake@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "doctrine/orm": "^2.5",
+        "doctrine/instantiator": "~1.0.3",
+        "twig/twig": "^1.0||^2.0",
+        "symfony/yaml": "^4.3",
+        "symfony/dependency-injection": "^4.3",
+        "symfony/http-kernel": "^4.3",
+        "symfony/http-foundation": "^4.3",
+        "symfony/templating": "^4.3",
+        "symfony/var-dumper": "^4.3",
+        "symfony/console": "^4.3",
+        "symfony/config": "^4.3",
+        "symfony/class-loader": "^3.4",
+        "symfony/cache": "^4.3",
+        "symfony/asset": "^4.3",
+        "symfony/validator": "^4.3",
+        "symfony/process": "^4.3",
+        "symfony/routing": "^4.3",
+        "symfony/security": "^4.3",
+        "symfony/options-resolver": "^4.3",
+        "symfony/event-dispatcher": "^4.3",
+        "symfony/expression-language": "^4.3",
+        "symfony/finder": "^4.3",
+        "symfony/form": "^4.3",
+        "symfony/serializer": "^4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "YuZhi\\": "src/lib/"
+        }
+    },
+    "minimum-stability": "dev"
+}
